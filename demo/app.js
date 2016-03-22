@@ -597,14 +597,17 @@ const Demo = React.createClass({
       label: _find(this.state.drawerSiblings, { selected: true }).id + ' of ' + this.state.drawerSiblings.length,
       onPreviousClick: this._handlePreviousSiblingClick
     };
+    
+
 
     return (
-      <div>
+      <div style={{padding: 40}}>
         <br /><br /><br /><br />
         <Tree
-          heading='New Tree for Gunny'
-          nested={[(<Tree heading='One Level Nested ' nested={[(<Tree heading='Nested Tree' nested={['one', 'two', 'three']}/>), 'three']}/>), (<Tree heading='New Tree' nested={['one', 'two', 'three']}/>), 'Lukey', 'Another One', 'Final one']}
-          iconType='Android'
+          heading='XXX Tree for Gunny'
+          contents={[
+            (<Tree heading='One Level contents' contents={[(<Tree heading='contents Tree' contents={['one', 'two', 'three']}/>), 'three']} />), (<Tree heading='New Tree' contents={['one', 'two', 'three']} />), 'Lukey', 'Another One', 'Final one']}
+
         >
         </Tree>
         <br /><br /><br /><br />
