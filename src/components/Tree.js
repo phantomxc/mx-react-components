@@ -6,9 +6,9 @@ const StyleConstants = require('../constants/Style');
 const Tree = React.createClass({
   propTypes: {
     heading: React.PropTypes.string,
-    nested: React.PropTypes.array,
+    iconColor: React.PropTypes.string,
     iconType: React.PropTypes.string,
-    iconColor: React.PropTypes.string
+    nested: React.PropTypes.array
   },
 
   getDefaultProps () {
@@ -17,75 +17,82 @@ const Tree = React.createClass({
       iconColor: StyleConstants.Colors.ASH
     };
   },
-  
+
   getInitialState () {
     return {
       orientation: 'rotate(-90deg)',
       displayChildren: false
-    }
+    };
   },
-  
+
   _handleParentClick () {
     const orientation = this.state.orientation === 'rotate(-90deg)' ? 'rotate(0deg)' : 'rotate(-90deg)';
-    
+
     this.setState({
       orientation,
       displayChildren: !this.state.displayChildren
-    })
+    });
   },
-  
-  renderIcon(node) {
-    const styles = this.styles()
+
+  _renderIcon (node) {
+    const styles = this.styles();
 
     if (typeof node === 'string') {
       return (
         <div>
-        <Icon size={20} style={{color: '#359BCF'}}/>
+        <Icon
+          size={20}
+          style={{ color: '#359BCF' }}
+          type='document'/>
         <span style={styles.heading}>{node}</span>
         </div>
-      )
+      );
     } else {
       return (
         <div>{node}</div>
-      )
+      );
     }
   },
 
   _renderChildren () {
     const styles = this.styles();
 
-    if(this.state.displayChildren) {
+    if (this.state.displayChildren) {
       return (
         <div style={styles.children}>
           <ul style={styles.list}>
             {this.props.nested.map((node, index) => {
-              return(
+              return (
                 <div key={index} style={styles.parent}>
-                  {this.renderIcon(node)}
+                  {this._renderIcon(node)}
                 </div>
-              )
+              );
             })}
-          </ul>  
+          </ul>
         </div>
-      )
-    } else return null
+      );
+    } else return null;
   },
 
   render () {
     const styles = this.styles();
 
-      return (
-        <div className='mx-tree' style={styles.component}>
-          <div onClick={this._handleParentClick} style={styles.parent}>
-            <div style={styles.triangle}>▾</div>
-            <Icon type={this.props.iconType} size={20} style={{color: '#359BCF'}}/>
-            <span style={styles.heading}>{this.props.heading}</span>
-          </div>
-          {this._renderChildren()}
+    return (
+      <div className='mx-tree' style={styles.component}>
+        <div onClick={this._handleParentClick} style={styles.parent}>
+          <div style={styles.triangle}>▾</div>
+          <Icon
+            size={20}
+            style={{ color: '#359BCF' }}
+            type={this.props.iconType}
+          />
+          <span style={styles.heading}>{this.props.heading}</span>
         </div>
-      );
+        {this._renderChildren()}
+      </div>
+    );
   },
-  
+
   styles () {
     return {
       component: {
@@ -115,17 +122,16 @@ const Tree = React.createClass({
         display: 'inline-block',
         position: 'absolute',
         left: '-20px',
-        top: '10px'
+        top: 10
       },
       parent: {
         cursor: 'pointer',
         position: 'relative',
-
         padding: 0
       }
-    }
+    };
   }
-  
+
 });
 
 

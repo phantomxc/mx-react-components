@@ -602,8 +602,8 @@ const Demo = React.createClass({
       <div>
         <br /><br /><br /><br />
         <Tree
-          header='Testing Header Prop'
-          nested={['First Nesting', (<Tree header='New Tree' nested={['one', 'two', 'three']}/>), 'Third Nesting', 'Lukey', 'Another One']}
+          heading='New Tree for Gunny'
+          nested={[(<Tree heading='One Level Nested ' nested={[(<Tree heading='Nested Tree' nested={['one', 'two', 'three']}/>), 'three']}/>), (<Tree heading='New Tree' nested={['one', 'two', 'three']}/>), 'Lukey', 'Another One', 'Final one']}
           iconType='Android'
         >
         </Tree>
