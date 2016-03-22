@@ -600,9 +600,11 @@ const Demo = React.createClass({
 
     return (
       <div>
+        <br /><br /><br /><br />
         <Tree
           header='Testing Header Prop'
-          nested={['First Nesting', (<Tree header='New Tree' nested={['one', 'two', 'three']}/>), 'Third Nesting']}
+          nested={['First Nesting', (<Tree header='New Tree' nested={['one', 'two', 'three']}/>), 'Third Nesting', 'Lukey', 'Another One']}
+          iconType='Android'
         >
         </Tree>
         <br /><br /><br /><br />

@@ -6,12 +6,15 @@ const StyleConstants = require('../constants/Style');
 const Tree = React.createClass({
   propTypes: {
     heading: React.PropTypes.string,
-    nested: React.PropTypes.array
+    nested: React.PropTypes.array,
+    iconType: React.PropTypes.string,
+    iconColor: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
-      heading: 'Default Heading'
+      heading: 'Default Heading',
+      iconColor: StyleConstants.Colors.ASH
     };
   },
   
@@ -37,10 +40,10 @@ const Tree = React.createClass({
     if(this.state.displayChildren) {
       return (
         <div style={styles.children}>
-          <ul>
+          <ul style={styles.list}>
             {this.props.nested.map((node, index) => {
               return(
-                <li key={index} style={styles.listElement}>{node}</li>
+                <li key={index} style={styles.listElement}><span style={styles.heading}>{node}</span></li>
               )
             })}
           </ul>  
@@ -55,7 +58,7 @@ const Tree = React.createClass({
       return (
         <div className='mx-tree' style={styles.component}>
           <div onClick={this._handleParentClick} style={styles.parent}>
-            <div style={styles.triangle}>▾</div>  <p style={styles.heading}>{this.props.heading}</p>
+            <div style={styles.triangle}>▾</div><Icon type={this.props.iconType} size={20} style={{color: '#359BCF'}}/><p style={styles.heading}>{this.props.heading}</p>
           </div>
           {this._renderChildren()}
         </div>
@@ -65,20 +68,33 @@ const Tree = React.createClass({
   styles () {
     return {
       component: {
-        margin: '20px'
+        
       },
       heading: {
         margin: 0,
+        display: 'inline-block',
+        marginLeft: 5,
+        marginTop: 10,
+        marginBottom: 10,
+        fontFamily: StyleConstants.Fonts.THIN
+      },
+      iconHolder: {
+        border: '1px solid gray',
+        padding: 2,
+        borderRadius: 5,
         display: 'inline-block'
+      },
+      list: {
+        listStyleType: 'none',
+        margin: 0,
+        padding: 5
       },
       triangle: {
         transform: this.state.orientation,
-        display: 'inline-block'
+        display: 'inline-block',
+        marginRight: 5
       },
       parent: {
-        border: '1px solid gray',
-        borderRadius: '5px',
-        padding: '5px',
         cursor: 'pointer'
       }
     }
