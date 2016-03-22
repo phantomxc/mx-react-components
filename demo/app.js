@@ -19,6 +19,7 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
+  Tree,
   TypeAhead
 } = require('../src/Index');
 
@@ -599,8 +600,17 @@ const Demo = React.createClass({
 
     return (
       <div>
+        <Tree>
+          <ul>
+            <li> test 1 </li>
+            <li> test 2 </li>
+            <li> test 3 </li>
+          </ul>
+        </Tree>
+        <br /><br /><br /><br />
+      
         <br/><br/>
-          <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
+          <Button onClick={this._handleShowDrawerClick} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
           {this.state.showDrawer ?
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
             <Drawer navConfig={navConfig} onClose={this._onHideDrawer}>
@@ -878,6 +888,7 @@ const Demo = React.createClass({
         <br/><br/>
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
+
         </div>
 
         <br/><br/>
