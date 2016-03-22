@@ -33,6 +33,23 @@ const Tree = React.createClass({
       displayChildren: !this.state.displayChildren
     })
   },
+  
+  renderIcon(node) {
+    const styles = this.styles()
+
+    if (typeof node === 'string') {
+      return (
+        <div>
+        <Icon size={20} style={{color: '#359BCF'}}/>
+        <span style={styles.heading}>{node}</span>
+        </div>
+      )
+    } else {
+      return (
+        <div>{node}</div>
+      )
+    }
+  },
 
   _renderChildren () {
     const styles = this.styles();
@@ -43,7 +60,9 @@ const Tree = React.createClass({
           <ul style={styles.list}>
             {this.props.nested.map((node, index) => {
               return(
-                <li key={index} style={styles.listElement}><span style={styles.heading}>{node}</span></li>
+                <div key={index} style={styles.parent}>
+                  {this.renderIcon(node)}
+                </div>
               )
             })}
           </ul>  
@@ -58,7 +77,9 @@ const Tree = React.createClass({
       return (
         <div className='mx-tree' style={styles.component}>
           <div onClick={this._handleParentClick} style={styles.parent}>
-            <div style={styles.triangle}>▾</div><Icon type={this.props.iconType} size={20} style={{color: '#359BCF'}}/><p style={styles.heading}>{this.props.heading}</p>
+            <div style={styles.triangle}>▾</div>
+            <Icon type={this.props.iconType} size={20} style={{color: '#359BCF'}}/>
+            <span style={styles.heading}>{this.props.heading}</span>
           </div>
           {this._renderChildren()}
         </div>
@@ -68,7 +89,7 @@ const Tree = React.createClass({
   styles () {
     return {
       component: {
-        
+        margin: 0
       },
       heading: {
         margin: 0,
@@ -87,15 +108,20 @@ const Tree = React.createClass({
       list: {
         listStyleType: 'none',
         margin: 0,
-        padding: 5
+        paddingLeft: 15
       },
       triangle: {
         transform: this.state.orientation,
         display: 'inline-block',
-        marginRight: 5
+        position: 'absolute',
+        left: '-20px',
+        top: '10px'
       },
       parent: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'relative',
+
+        padding: 0
       }
     }
   }
