@@ -5,7 +5,8 @@ const StyleConstants = require('../constants/Style');
 
 const Tree = React.createClass({
   propTypes: {
-    heading: React.PropTypes.string
+    heading: React.PropTypes.string,
+    nested: React.PropTypes.array
   },
 
   getDefaultProps () {
@@ -36,7 +37,13 @@ const Tree = React.createClass({
     if(this.state.displayChildren) {
       return (
         <div style={styles.children}>
-          {this.props.children}
+          <ul>
+            {this.props.nested.map((node, index) => {
+              return(
+                <li key={index} style={styles.listElement}>{node}</li>
+              )
+            })}
+          </ul>  
         </div>
       )
     } else return null
@@ -72,6 +79,7 @@ const Tree = React.createClass({
         border: '1px solid gray',
         borderRadius: '5px',
         padding: '5px',
+        cursor: 'pointer'
       }
     }
   }
