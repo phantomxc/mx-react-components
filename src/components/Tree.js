@@ -47,9 +47,18 @@ const Tree = React.createClass({
     return level.map(obj => {  
       let childId = 0;
       return (
-        <ul>
+        <ul style={styles.list}>
           <li key={obj.id}>
-              <span style={styles.name} onClick={this._handleParentClick.bind(null, obj.id)}>{obj.name}</span>
+              <div>
+              
+              <Icon
+                type={obj.icon}
+                size={20}
+              />
+              <span style={styles.name} onClick={this._handleParentClick.bind(null, obj.id)}>
+              {obj.name}
+              </span>
+              </div>
               {this.state[obj.id] && obj.children && obj.children.length ? this.renderTree(obj.children) : null}
           </li>
         </ul>
@@ -95,7 +104,7 @@ const Tree = React.createClass({
     const styles = this.styles();
 
     return (
-      <div className='tree'>
+      <div className='tree' style={styles.parent}>
         <ul>
           {this.renderTree(this.props.items)}
         </ul>
@@ -133,7 +142,8 @@ const Tree = React.createClass({
       },
       parent: {
         cursor: 'pointer',
-        position: 'relative'
+        position: 'relative',
+        listStyleType: 'none'
       }
     };
   }

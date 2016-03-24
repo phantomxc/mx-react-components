@@ -610,26 +610,31 @@ const Demo = React.createClass({
                 parentId: null,
                 id: '0',
                 name: 'main Header Title One',
+                icon: 'list-view',
                 children: [
                   {
                     parentId: '0',
                     id: '2',
                     name: 'Second Level Header One',
+                    icon: 'list-view',
                     children: [
                       {
                         parentId: '2',
                         id: '3',
-                        name: 'Third Level Header One'
+                        name: 'Third Level Header One',
+                        icon: 'document'
                       },
                       {
                         parentId: '2',
                         id: '4',
-                        name: 'Third Level Header Two'
+                        name: 'Third Level Header Two',
+                        icon: 'document'
                       },
                       {
                         parentId: '2',
                         id: '5',
-                        name: 'Third Level Header Three'
+                        name: 'Third Level Header Three',
+                        icon: 'document'
                       }
                     ]
                   },
@@ -637,33 +642,39 @@ const Demo = React.createClass({
                     parentId: '0',
                     id: '6',
                     name: 'Second Level Header Two',
+                    icon: 'list-view',
                     children: [
                       {
                         parentId: '6',
                         id: '7',
-                        name: 'Third Level Header Four'
+                        name: 'Third Level Header Four',
+                        icon: 'document'
                       },
                       {
                         parentId: '6',
                         id: '8',
-                        name: 'Third Level Header Five'
+                        name: 'Third Level Header Five',
+                        icon: 'document'
                       }
                     ]
                   },
                   {
                     parentId: null,
                     id: '9',
-                    name: 'Second Level Header Three'
+                    name: 'Second Level Header Three',
+                    icon: 'document'
                   },
                   {
                     parentId: '0',
                     id: '10',
                     name: 'Second Level Header Four',
+                    icon: 'list-view',
                     children: [
                       {
                         parentId: '10',
                         id: '11',
-                        name: 'Third Level Header 6'
+                        name: 'Third Level Header 6',
+                        icon: 'document'
                       }
                     ]
                   }
@@ -673,16 +684,19 @@ const Demo = React.createClass({
                 parentId: null,
                 id: '1',
                 name: 'Main Header Title Two',
+                icon: 'list-view',
                 children: [
                   {
                     parentId: '1',
                     id: '12',
-                    name: 'Second Level Header-B1'
+                    name: 'Second Level Header-B1',
+                    icon: 'document'
                   },
                   {
                     parentId: '1',
                     id: '13',
-                    name: 'Second Level Header -B2'
+                    name: 'Second Level Header -B2',
+                    icon: 'document'
                   }
                 ]
               }
