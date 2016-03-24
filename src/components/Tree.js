@@ -23,63 +23,82 @@ const Tree = React.createClass({
   getInitialState () {
     return {
       triangleOrientation: 'rotate(-90deg)',
-      displayChildren: false
+      displayChildren: false,
+      parentId: null
     };
   },
+  
 
-  _handleParentClick (index) {
-    console.log("this is index", index);
+  _handleParentClick (id) {
+    // console.log("this is parent", obj);
     const triangleOrientation = this.state.triangleOrientation === 'rotate(-90deg)' ? 'rotate(0deg)' : 'rotate(-90deg)';
-
+    // const parentId = this.state.parentId === obj.children[0].parentId ? null : obj.children[0].parentId;
+    
     this.setState({
       triangleOrientation,
-      displayChildren: !this.state.displayChildren
+      [id]: !this.state[id]
     });
   },
 
-  renderTree () {
-    return <ul> {this.props.items.map((obj, index) => this.recursiveJson(obj, index))} </ul>
-  },
-  
-  recursiveJson (obj, index) {
+  renderTree (level) {
+    let levelId = 0;
     const styles = this.styles();
 
-    console.log("this is children", obj.children);
-    const renderChild = (json) => this.recursiveJson(json)
-    return (
-      <ul>
-        <div onClick={this._handleParentClick.bind(null, index)} style={styles.parent}>
-          {obj.children ? (
-          <span>  
-          <div style={styles.triangle}>▾</div>
-          <Icon
-            size={20}
-            style={{ color: this.props.iconColor }}
-            type={this.props.parentIconType}
-          />
-          </span>
-        ) : (
-          <Icon
-            size={20}
-            style={{ color: this.props.iconColor }}
-            type={this.props.childIconType}
-          />
-        )}
-        <span style={styles.heading}>{obj.name}</span>
-        </div>
-        <div style={styles.children}>
-          {obj.children ? obj.children.map(renderChild) : null}
-        </div>
-      </ul>
-    )
+    return level.map(obj => {  
+      let childId = 0;
+      return (
+        <ul>
+          <li key={obj.id}>
+              <span style={styles.name} onClick={this._handleParentClick.bind(null, obj.id)}>{obj.name}</span>
+              {this.state[obj.id] && obj.children && obj.children.length ? this.renderTree(obj.children) : null}
+          </li>
+        </ul>
+      );
+    });
   },
+  
+  // recursiveJson (obj, index) {
+  //   // console.log("this is this.state.displayChildren", this.state.displayChildren);
+  //   const styles = this.styles();
+  // 
+  //   // console.log("this is children", obj.children);
+  //   const renderChild = (json) => this.recursiveJson(json)
+  //   return (
+  //     <ul>
+  //       <div onClick={this._handleParentClick.bind(null, index)} style={styles.parent}>
+  //         {obj.children ? (
+  //         <span>  
+  //         <div style={styles.triangle}>▾</div>
+  //         <Icon
+  //           size={20}
+  //           style={{ color: this.props.iconColor }}
+  //           type={this.props.parentIconType}
+  //         />
+  //         </span>
+  //       ) : (
+  //         <Icon
+  //           size={20}
+  //           style={{ color: this.props.iconColor }}
+  //           type={this.props.childIconType}
+  //         />
+  //       )}
+  //       <span style={styles.heading}>{obj.name}</span>
+  //       </div>
+  //       <div style={styles.children}>
+  //         {obj.children ? obj.children.map(renderChild) : null}
+  //       </div>
+  //     </ul>
+  //   )
+  // },
 
   render () {
     const styles = this.styles();
 
     return (
       <div className='tree'>
-        {this.renderTree()}
+        <ul>
+          {this.renderTree(this.props.items)}
+        </ul>
       </div>
     );
   },

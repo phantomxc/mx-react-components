@@ -607,40 +607,62 @@ const Demo = React.createClass({
           items={
             [
               {
+                parentId: null,
+                id: '0',
                 name: 'main Header Title One',
                 children: [
                   {
+                    parentId: '0',
+                    id: '2',
                     name: 'Second Level Header One',
                     children: [
                       {
+                        parentId: '2',
+                        id: '3',
                         name: 'Third Level Header One'
                       },
                       {
+                        parentId: '2',
+                        id: '4',
                         name: 'Third Level Header Two'
                       },
                       {
+                        parentId: '2',
+                        id: '5',
                         name: 'Third Level Header Three'
                       }
                     ]
                   },
                   {
+                    parentId: '0',
+                    id: '6',
                     name: 'Second Level Header Two',
                     children: [
                       {
+                        parentId: '6',
+                        id: '7',
                         name: 'Third Level Header Four'
                       },
                       {
+                        parentId: '6',
+                        id: '8',
                         name: 'Third Level Header Five'
                       }
                     ]
                   },
                   {
+                    parentId: null,
+                    id: '9',
                     name: 'Second Level Header Three'
                   },
                   {
+                    parentId: '0',
+                    id: '10',
                     name: 'Second Level Header Four',
                     children: [
                       {
+                        parentId: '10',
+                        id: '11',
                         name: 'Third Level Header 6'
                       }
                     ]
@@ -648,12 +670,18 @@ const Demo = React.createClass({
                 ]
               },
               {
+                parentId: null,
+                id: '1',
                 name: 'Main Header Title Two',
                 children: [
                   {
+                    parentId: '1',
+                    id: '12',
                     name: 'Second Level Header-B1'
                   },
                   {
+                    parentId: '1',
+                    id: '13',
                     name: 'Second Level Header -B2'
                   }
                 ]
