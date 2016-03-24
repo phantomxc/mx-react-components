@@ -604,9 +604,62 @@ const Demo = React.createClass({
       <div style={{padding: 40}}>
         <br /><br /><br /><br />
         <Tree
-          heading='XXX Tree for Gunny'
-          contents={[
-            (<Tree heading='One Level contents' contents={[(<Tree heading='contents Tree' contents={['one', 'two', 'three']}/>), 'three']} />), (<Tree heading='New Tree' contents={['one', 'two', 'three']} />), 'Lukey', 'Another One', 'Final one']}
+          items={
+            [
+              {
+                name: 'main Header Title One',
+                children: [
+                  {
+                    name: 'Second Level Header One',
+                    children: [
+                      {
+                        name: 'Third Level Header One'
+                      },
+                      {
+                        name: 'Third Level Header Two'
+                      },
+                      {
+                        name: 'Third Level Header Three'
+                      }
+                    ]
+                  },
+                  {
+                    name: 'Second Level Header Two',
+                    children: [
+                      {
+                        name: 'Third Level Header Four'
+                      },
+                      {
+                        name: 'Third Level Header Five'
+                      }
+                    ]
+                  },
+                  {
+                    name: 'Second Level Header Three'
+                  },
+                  {
+                    name: 'Second Level Header Four',
+                    children: [
+                      {
+                        name: 'Third Level Header 6'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: 'Main Header Title Two',
+                children: [
+                  {
+                    name: 'Second Level Header-B1'
+                  },
+                  {
+                    name: 'Second Level Header -B2'
+                  }
+                ]
+              }
+            ]
+          }
 
         >
         </Tree>

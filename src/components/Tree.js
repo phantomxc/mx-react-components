@@ -3,11 +3,11 @@ const React = require('react');
 const Icon = require('./Icon');
 const StyleConstants = require('../constants/Style');
 
+
 const Tree = React.createClass({
   propTypes: {
     childIconType: React.PropTypes.string,
-    contents: React.PropTypes.array,
-    heading: React.PropTypes.string.isRequired,
+    items: React.PropTypes.array,
     iconColor: React.PropTypes.string,
     parentIconType: React.PropTypes.string
   },
@@ -27,7 +27,8 @@ const Tree = React.createClass({
     };
   },
 
-  _handleParentClick () {
+  _handleParentClick (index) {
+    console.log("this is index", index);
     const triangleOrientation = this.state.triangleOrientation === 'rotate(-90deg)' ? 'rotate(0deg)' : 'rotate(-90deg)';
 
     this.setState({
@@ -36,42 +37,49 @@ const Tree = React.createClass({
     });
   },
 
-  render () {
+  renderTree () {
+    return <ul> {this.props.items.map((obj, index) => this.recursiveJson(obj, index))} </ul>
+  },
+  
+  recursiveJson (obj, index) {
     const styles = this.styles();
 
+    console.log("this is children", obj.children);
+    const renderChild = (json) => this.recursiveJson(json)
     return (
-      <div className='mx-tree'>
-        <div onClick={this._handleParentClick} style={styles.parent}>
+      <ul>
+        <div onClick={this._handleParentClick.bind(null, index)} style={styles.parent}>
+          {obj.children ? (
+          <span>  
           <div style={styles.triangle}>▾</div>
           <Icon
             size={20}
             style={{ color: this.props.iconColor }}
             type={this.props.parentIconType}
           />
-          <span style={styles.heading}>{this.props.heading}</span>
+          </span>
+        ) : (
+          <Icon
+            size={20}
+            style={{ color: this.props.iconColor }}
+            type={this.props.childIconType}
+          />
+        )}
+        <span style={styles.heading}>{obj.name}</span>
         </div>
-        {this.state.displayChildren ? (
-          <div style={styles.children}>
-            <ul style={styles.list}>
-              {this.props.contents.map((node, index) => {
-                return (
-                  <div key={index} style={styles.parent}>
-                    {typeof node === 'string' ? (
-                      <div>
-                        <Icon
-                          size={20}
-                          style={{ color: this.props.iconColor }}
-                          type={this.props.childIconType}/>
-                        <span style={styles.heading}>{node}</span>
-                      </div>
-                    ) : (<div>{node}</div>)
-                    }
-                  </div>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null }
+        <div style={styles.children}>
+          {obj.children ? obj.children.map(renderChild) : null}
+        </div>
+      </ul>
+    )
+  },
+
+  render () {
+    const styles = this.styles();
+
+    return (
+      <div className='tree'>
+        {this.renderTree()}
       </div>
     );
   },
