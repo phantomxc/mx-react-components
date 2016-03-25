@@ -702,7 +702,6 @@ const Demo = React.createClass({
               }
             ]
           }
-
         >
         </Tree>
         <br /><br /><br /><br />
