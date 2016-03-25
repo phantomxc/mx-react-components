@@ -13,17 +13,13 @@ const Tree = React.createClass({
 
   getDefaultProps () {
     return {
-      childIconType: 'document',
-      iconColor: StyleConstants.Colors.PRIMARY,
-      parentIconType: 'list-view'
+      iconColor: StyleConstants.Colors.PRIMARY
     };
   },
 
   getInitialState () {
     return {
-      triangleOrientation: 'rotate(-90deg)',
-      displayChildren: false,
-      parentId: null
+      null
     };
   },
 
@@ -34,16 +30,14 @@ const Tree = React.createClass({
   },
 
   renderTree (level, id = 0) {
-    const styles = this.styles();
+    const levelId = id += 1;
     let childId = 0;
-    let levelId = id;
+    const styles = this.styles();
 
-    levelId = levelId++;
-
-    return level.map(obj => {
+    return level.map((obj, index) => {
       childId++;
       return (
-        <ul style={styles.list}>
+        <ul key={index} style={styles.list}>
           <li key={obj.id}>
             <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId)} style={styles.parent}>
               {obj.children && obj.children.length ? (
@@ -58,7 +52,7 @@ const Tree = React.createClass({
                 }}
                 type={obj.icon || ((obj.children && obj.children.length) ? 'list-view' : 'document')}
               />
-              <span style={styles.name}>
+              <span style={styles.name} >
                 {obj.name}
               </span>
             </div>
@@ -107,6 +101,7 @@ const Tree = React.createClass({
       }
     };
   }
+
 });
 
 module.exports = Tree;
