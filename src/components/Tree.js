@@ -30,6 +30,7 @@ const Tree = React.createClass({
   
 
   _handleParentClick (id) {
+    console.log("this is id", id)
     // console.log("this is parent", obj);
     const triangleOrientation = this.state.triangleOrientation === 'rotate(-90deg)' ? 'rotate(0deg)' : 'rotate(-90deg)';
     // const parentId = this.state.parentId === obj.children[0].parentId ? null : obj.children[0].parentId;
@@ -40,26 +41,30 @@ const Tree = React.createClass({
     });
   },
 
-  renderTree (level) {
-    let levelId = 0;
+  renderTree (level, id = 0) {
+    let levelId = id += 1;
+    let childId = 0;
     const styles = this.styles();
-
-    return level.map(obj => {  
-      let childId = 0;
+    
+    return level.map(obj => { 
+      childId++;
       return (
         <ul style={styles.list}>
           <li key={obj.id}>
               <div>
-              
-              <Icon
-                type={obj.icon}
-                size={20}
-              />
-              <span style={styles.name} onClick={this._handleParentClick.bind(null, obj.id)}>
-              {obj.name}
-              </span>
+                <Icon
+                  type={obj.icon || ((obj.children && obj.children.length) ? 'list-view' : 'document')}
+                  size={25}
+                  style={{
+                    color: StyleConstants.Colors.PRIMARY
+                  }}
+                />
+                <span style={styles.name} onClick={this._handleParentClick.bind(null, levelId + '-' + childId)}>
+                  {console.log('ID', levelId + '-' + childId)}
+                  {obj.name}
+                </span>
               </div>
-              {this.state[obj.id] && obj.children && obj.children.length ? this.renderTree(obj.children) : null}
+              {this.state[levelId + '-' + childId] && obj.children && obj.children.length ? this.renderTree(obj.children, levelId) : null}
           </li>
         </ul>
       );
@@ -143,7 +148,9 @@ const Tree = React.createClass({
       parent: {
         cursor: 'pointer',
         position: 'relative',
-        listStyleType: 'none'
+        listStyleType: 'none',
+        fontFamily: StyleConstants.Fonts.THIN,
+        margin: '24px 0'
       }
     };
   }

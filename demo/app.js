@@ -610,25 +610,25 @@ const Demo = React.createClass({
                 parentId: null,
                 id: '0',
                 name: 'main Header Title One',
-                icon: 'list-view',
+                // icon: 'list-view',
                 children: [
                   {
                     parentId: '0',
                     id: '2',
                     name: 'Second Level Header One',
-                    icon: 'list-view',
+                    // icon: 'list-view',
                     children: [
                       {
                         parentId: '2',
                         id: '3',
                         name: 'Third Level Header One',
-                        icon: 'document'
+                        // icon: 'document'
                       },
                       {
                         parentId: '2',
                         id: '4',
                         name: 'Third Level Header Two',
-                        icon: 'document'
+                        // icon: 'document'
                       },
                       {
                         parentId: '2',
@@ -641,7 +641,7 @@ const Demo = React.createClass({
                   {
                     parentId: '0',
                     id: '6',
-                    name: 'Second Level Header Two',
+                    name: 'Second Level Header TwXXXo',
                     icon: 'list-view',
                     children: [
                       {
