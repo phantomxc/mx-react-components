@@ -28,7 +28,7 @@ const Tree = React.createClass({
   },
 
   renderTree (level, id = 0) {
-    const levelId = id += 1;
+    const levelId = id + 1;
     let childId = 0;
     const styles = this.styles();
 
@@ -40,7 +40,7 @@ const Tree = React.createClass({
             <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId)} style={styles.parent}>
               {obj.children && obj.children.length ? (
                 <div style={styles.triangle}>
-                  {this.state[levelId + '-' + childId] ? '▾' : '▸'}
+                  {this.state[levelId + '-' + childId] ? <Icon size={20} type='caret-down'/> : <Icon size={20} type='caret-right'/>}
                 </div>
               ) : null}
               <Icon
@@ -86,7 +86,7 @@ const Tree = React.createClass({
         display: 'inline-block',
         position: 'absolute',
         left: -20,
-        top: 5
+        top: 3
       },
       parent: {
         cursor: 'pointer',
