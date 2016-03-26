@@ -5,10 +5,8 @@ const StyleConstants = require('../constants/Style');
 
 const Tree = React.createClass({
   propTypes: {
-    childIconType: React.PropTypes.string,
     iconColor: React.PropTypes.string,
-    items: React.PropTypes.array,
-    parentIconType: React.PropTypes.string
+    items: React.PropTypes.array
   },
 
   getDefaultProps () {
@@ -50,7 +48,7 @@ const Tree = React.createClass({
                 style={{
                   color: this.props.iconColor
                 }}
-                type={obj.icon || ((obj.children && obj.children.length) ? 'list-view' : 'document')}
+                type={obj.icon || (obj.children && obj.children.length ? 'list-view' : 'document')}
               />
               <span style={styles.name} >
                 {obj.name}
@@ -66,9 +64,7 @@ const Tree = React.createClass({
   render () {
     return (
       <div className='tree'>
-        <ul>
-          {this.renderTree(this.props.items)}
-        </ul>
+        {this.renderTree(this.props.items)}
       </div>
     );
   },
@@ -76,7 +72,7 @@ const Tree = React.createClass({
   styles () {
     return {
       iconHolder: {
-        border: '1px solid gray',
+        border: '1px solid ' + StyleConstants.Colors.ASH,
         padding: 2,
         borderRadius: 5,
         display: 'inline-block'
@@ -89,7 +85,7 @@ const Tree = React.createClass({
       triangle: {
         display: 'inline-block',
         position: 'absolute',
-        left: '-20px',
+        left: -20,
         top: 5
       },
       parent: {
