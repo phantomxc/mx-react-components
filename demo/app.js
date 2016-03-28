@@ -607,20 +607,14 @@ const Demo = React.createClass({
           items={
             [
               {
-                parentId: null,
-                id: '0',
                 name: 'main Header Title One',
                 // icon: 'list-view',
                 children: [
                   {
-                    parentId: '0',
-                    id: '2',
                     name: 'Second Level Header One',
                     // icon: 'list-view',
                     children: [
                       {
-                        parentId: '2',
-                        id: '3',
                         name: 'Third Level Header One',
                         // icon: 'document'
                       },
