@@ -25,7 +25,7 @@ const Tree = React.createClass({
       [id]: !this.state[id]
     });
 
-    if (!children) {
+    if (!children || !children.length) {
       this.props.handleChildClick();
     }
   },

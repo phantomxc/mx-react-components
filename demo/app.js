@@ -660,7 +660,8 @@ const Demo = React.createClass({
                     parentId: null,
                     id: '9',
                     name: 'Second Level Header Three',
-                    icon: 'document'
+                    icon: 'document',
+                    children: []
                   },
                   {
                     parentId: '0',
