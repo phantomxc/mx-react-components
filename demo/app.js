@@ -589,6 +589,10 @@ const Demo = React.createClass({
       showDrawerButtonType: 'primary'
     });
   },
+  
+  handleChildClick () {
+    console.log("BLUE BLUE BLUE B ABY")
+  },
 
   render () {
     const navConfig = {
@@ -696,6 +700,7 @@ const Demo = React.createClass({
               }
             ]
           }
+          handleChildClick={this.handleChildClick}
           
         >
         </Tree>

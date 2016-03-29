@@ -6,7 +6,8 @@ const Styles = require('../constants/Style');
 const Tree = React.createClass({
   propTypes: {
     iconColor: React.PropTypes.string,
-    items: React.PropTypes.array
+    items: React.PropTypes.array,
+    handleChildClick: React.PropTypes.func
   },
 
   getDefaultProps () {
@@ -19,10 +20,16 @@ const Tree = React.createClass({
     return {};
   },
 
-  _handleParentClick (id) {
+  _handleParentClick (id, children) {
+    console.log("this is id", id);
     this.setState({
       [id]: !this.state[id]
     });
+    
+    if (!children) {
+      this.props.handleChildClick()
+    }
+    
   },
 
   _renderTree (level, id = 0) {
@@ -32,11 +39,12 @@ const Tree = React.createClass({
 
     return level.map((obj, i) => {
       childId++;
+      console.log("this is child id", childId, "this is obj", obj, "this is parentId", levelId );
 
       return (
         <ul key={i} style={styles.list}>
           <li key={obj.id}>
-            <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId)} style={styles.parent}>
+            <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId, obj.children)} style={styles.parent}>
               {obj.children && obj.children.length ? (
                 <div style={styles.triangle}>
                   <Icon size={20} type={this.state[levelId + '-' + childId] ? 'caret-down' : 'caret-right'} />
@@ -47,7 +55,7 @@ const Tree = React.createClass({
                 style={styles.icon}
                 type={obj.icon || (obj.children && obj.children.length ? 'list-view' : 'document')}
               />
-              <span style={styles.name} >
+              <span style={styles.name}>
                 {obj.name}
               </span>
             </div>
