@@ -5,6 +5,7 @@ const Styles = require('../constants/Style');
 
 const Tree = React.createClass({
   propTypes: {
+    handleChildClick: React.PropTypes.func.isRequired,
     iconColor: React.PropTypes.string,
     items: React.PropTypes.array
   },
@@ -23,10 +24,10 @@ const Tree = React.createClass({
     this.setState({
       [id]: !this.state[id]
     });
-    
+
     if (!children) {
-      this.props.handleChildClick()
-    }    
+      this.props.handleChildClick();
+    }
   },
 
   _renderTree (level, id = 0) {

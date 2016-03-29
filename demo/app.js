@@ -591,7 +591,7 @@ const Demo = React.createClass({
   },
   
   handleChildClick () {
-    console.log("BLUE BLUE BLUE B ABY")
+    console.log("The CHILD WAS CLICKED - this function is in the parent")
   },
 
   render () {
