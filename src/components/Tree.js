@@ -20,6 +20,7 @@ const Tree = React.createClass({
   },
 
   _handleParentClick (id) {
+    console.log("this is id", id);
     this.setState({
       [id]: !this.state[id]
     });
@@ -31,17 +32,17 @@ const Tree = React.createClass({
     let childId = 0;
 
     return level.map((obj, i) => {
-      // const objectNameId = obj.name.replace(/\s+/g, '-').toLowerCase();
-
       childId++;
+
+      const objectNameId = levelId + '-' + childId + '-' + obj.name.replace(/\s+/g, '-').toLowerCase();
 
       return (
         <ul key={i} style={styles.list}>
           <li key={obj.id}>
-            <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId)} style={styles.parent}>
+            <div onClick={this._handleParentClick.bind(null, objectNameId)} style={styles.parent}>
               {obj.children && obj.children.length ? (
                 <div style={styles.triangle}>
-                  <Icon size={20} type={this.state[levelId + '-' + childId] ? 'caret-down' : 'caret-right'} />
+                  <Icon size={20} type={this.state[objectNameId] ? 'caret-down' : 'caret-right'} />
                 </div>
               ) : null}
               <Icon
@@ -53,7 +54,7 @@ const Tree = React.createClass({
                 {obj.name}
               </span>
             </div>
-            {this.state[levelId + '-' + childId] && obj.children && obj.children.length ? this._renderTree(obj.children, levelId) : null}
+            {this.state[objectNameId] && obj.children && obj.children.length ? this._renderTree(obj.children, levelId) : null}
           </li>
         </ul>
       );
@@ -72,6 +73,12 @@ const Tree = React.createClass({
     return {
       icon: {
         color: this.props.iconColor
+      },
+      iconHolder: {
+        border: '1px solid ' + Styles.Colors.ASH,
+        padding: 2,
+        borderRadius: 5,
+        display: 'inline-block'
       },
       list: {
         listStyleType: 'none',
