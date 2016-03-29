@@ -20,34 +20,31 @@ const Tree = React.createClass({
     return {};
   },
 
-  _handleParentClick (id, children) {
+  _handleParentClick (id) {
     console.log("this is id", id);
     this.setState({
       [id]: !this.state[id]
     });
-    
-    if (!children) {
-      this.props.handleChildClick()
-    }
-    
   },
 
   _renderTree (level, id = 0) {
     const levelId = id + 1;
     const styles = this.styles();
+    const random = this.generateRandomId()
     let childId = 0;
 
     return level.map((obj, i) => {
+      const objectNameId = obj.name.replace(/\s+/g, '-').toLowerCase();
       childId++;
-      console.log("this is child id", childId, "this is obj", obj, "this is parentId", levelId );
+      // console.log("this is child id", childId, "this is obj", obj, "this is parentId", levelId );
 
       return (
         <ul key={i} style={styles.list}>
           <li key={obj.id}>
-            <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId, obj.children)} style={styles.parent}>
+            <div onClick={this._handleParentClick.bind(null, levelId + '-' + childId + '-' + objectNameId)} style={styles.parent}>
               {obj.children && obj.children.length ? (
                 <div style={styles.triangle}>
-                  <Icon size={20} type={this.state[levelId + '-' + childId] ? 'caret-down' : 'caret-right'} />
+                  <Icon size={20} type={this.state[levelId + '-' + childId + '-' + objectNameId] ? 'caret-down' : 'caret-right'} />
                 </div>
               ) : null}
               <Icon
@@ -59,7 +56,7 @@ const Tree = React.createClass({
                 {obj.name}
               </span>
             </div>
-            {this.state[levelId + '-' + childId] && obj.children && obj.children.length ? this._renderTree(obj.children, levelId) : null}
+            {this.state[levelId + '-' + childId + '-' + objectNameId] && obj.children && obj.children.length ? this._renderTree(obj.children, levelId) : null}
           </li>
         </ul>
       );
