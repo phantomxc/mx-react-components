@@ -19,11 +19,14 @@ const Tree = React.createClass({
     return {};
   },
 
-  _handleParentClick (id) {
-    console.log("this is id", id);
+  _handleParentClick (id, children) {
     this.setState({
       [id]: !this.state[id]
     });
+    
+    if (!children) {
+      this.props.handleChildClick()
+    }    
   },
 
   _renderTree (level, id = 0) {
@@ -39,7 +42,7 @@ const Tree = React.createClass({
       return (
         <ul key={i} style={styles.list}>
           <li key={obj.id}>
-            <div onClick={this._handleParentClick.bind(null, objectNameId)} style={styles.parent}>
+            <div onClick={this._handleParentClick.bind(null, objectNameId, obj.children)} style={styles.parent}>
               {obj.children && obj.children.length ? (
                 <div style={styles.triangle}>
                   <Icon size={20} type={this.state[objectNameId] ? 'caret-down' : 'caret-right'} />
@@ -74,12 +77,6 @@ const Tree = React.createClass({
       icon: {
         color: this.props.iconColor
       },
-      iconHolder: {
-        border: '1px solid ' + Styles.Colors.ASH,
-        padding: 2,
-        borderRadius: 5,
-        display: 'inline-block'
-      },
       list: {
         listStyleType: 'none',
         margin: 0,
@@ -100,7 +97,6 @@ const Tree = React.createClass({
       }
     };
   }
-
 });
 
 module.exports = Tree;
