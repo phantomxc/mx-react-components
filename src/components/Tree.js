@@ -6,8 +6,7 @@ const Styles = require('../constants/Style');
 const Tree = React.createClass({
   propTypes: {
     iconColor: React.PropTypes.string,
-    items: React.PropTypes.array,
-    handleChildClick: React.PropTypes.func
+    items: React.PropTypes.array
   },
 
   getDefaultProps () {
@@ -21,7 +20,6 @@ const Tree = React.createClass({
   },
 
   _handleParentClick (id) {
-    console.log("this is id", id);
     this.setState({
       [id]: !this.state[id]
     });
@@ -30,13 +28,12 @@ const Tree = React.createClass({
   _renderTree (level, id = 0) {
     const levelId = id + 1;
     const styles = this.styles();
-    const random = this.generateRandomId()
     let childId = 0;
 
     return level.map((obj, i) => {
       const objectNameId = obj.name.replace(/\s+/g, '-').toLowerCase();
+
       childId++;
-      // console.log("this is child id", childId, "this is obj", obj, "this is parentId", levelId );
 
       return (
         <ul key={i} style={styles.list}>
