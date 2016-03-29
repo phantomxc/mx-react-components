@@ -207,7 +207,7 @@ const Select = React.createClass({
 
   render () {
     const styles = this.styles();
-    const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
+    const selected = this.state.selected || this.props.selected || { displayValue: this.props.trigger, value: '' };
 
     return (
       <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
