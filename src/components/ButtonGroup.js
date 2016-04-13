@@ -1,4 +1,5 @@
 const React = require('react');
+const Radium = require('radium');
 
 const Button = require('./Button');
 
@@ -62,11 +63,11 @@ const ButtonGroup = React.createClass({
 
   styles () {
     return {
-      component: Object.assign({
+      component: {
         borderRadius: 0,
         borderWidth: 1,
         borderRightWidth: 0
-      }, this.props.style),
+      },
       firstChild: {
         borderRadius: '2px 0 0 2px'
       },
@@ -89,4 +90,4 @@ const ButtonGroup = React.createClass({
   }
 });
 
-module.exports = ButtonGroup;
+module.exports = Radium(ButtonGroup);
